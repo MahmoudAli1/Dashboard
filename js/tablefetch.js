@@ -1,4 +1,6 @@
-        let key2,
+        
+        
+                let key2,
             sheetNum2,
             sheetType2;
         attachEvents();
@@ -34,7 +36,10 @@
               promise.then((data) => {
                     console.log(data);
   
-                var str = JSON.stringify(data).replace("]", "").replace("[", "").replace(",", "").replace(":", "");
+             //   var str = JSON.stringify(data).replace("]", "").replace("[", "").replace(",", "").replace(":", "");
+             //                   var str = JSON.stringify(data);
+
+                
                 var len = Object.keys(data.data).length;             
                         var table = document.getElementById("Projects_Table");
 
@@ -43,15 +48,20 @@ for (i = 0; i < len; i++) {
   var table = document.getElementById("Projects_Table");
   var row = table.insertRow(i+1);
   
-   // var scan = data.keys();
+    var scan = Object.keys(data.data)[i];
 
-  
+  //data["address"]["streetName"];        // (2) array notation 
+
   var table_ref = row.insertCell(0).innerHTML = Object.keys(data.data)[i];
-  var table_project_name = row.insertCell(1).innerHTML = Object.keys(data.data)[i];
-  var table_revenue = row.insertCell(2).innerHTML = Object.keys(data.data)[i];
-  var table_paid = row.insertCell(3).innerHTML = Object.keys(data.data)[i];
-  var table_status = row.insertCell(4).innerHTML = Object.keys(data.data)[i];
-
+  var table_project_name = row.insertCell(1).innerHTML = (data.data)[scan]["client"];
+  var table_revenue = row.insertCell(2).innerHTML = (data.data)[scan]["revenue"];
+  var table_paid = row.insertCell(3).innerHTML = (data.data)[scan]["paid"];
+  
+  if((data.data)[scan]["status"] === "COMPLETED"){
+  var table_status = row.insertCell(4).innerHTML = '<span class="badge badge-success">'+(data.data)[scan]["status"]+'</span>';
+  }else {
+    var table_status = row.insertCell(4).innerHTML = '<span class="badge badge-warning">'+(data.data)[scan]["status"]+'</span>';   
+  }
 }
                 
                 })
@@ -59,3 +69,4 @@ for (i = 0; i < len; i++) {
 
   }                 
  
+        
