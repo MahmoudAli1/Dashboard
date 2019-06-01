@@ -52,15 +52,18 @@ for (i = 0; i < len; i++) {
 
   //data["address"]["streetName"];        // (2) array notation 
 
-  var table_ref = row.insertCell(0).innerHTML = Object.keys(data.data)[i];
-  var table_project_name = row.insertCell(1).innerHTML = (data.data)[scan]["client"];
-  var table_revenue = row.insertCell(2).innerHTML = (data.data)[scan]["revenue"];
-  var table_paid = row.insertCell(3).innerHTML = (data.data)[scan]["paid"];
+  row.insertCell(0).innerHTML = Object.keys(data.data)[i];
+  row.insertCell(1).innerHTML = (data.data)[scan]["client"];
+  row.insertCell(2).innerHTML = (data.data)[scan]["project"];
+  row.insertCell(3).innerHTML = (data.data)[scan]["due"];
+  row.insertCell(4).innerHTML = (data.data)[scan]["revenue"];
   
-  if((data.data)[scan]["status"] === "COMPLETED"){
-  var table_status = row.insertCell(4).innerHTML = '<span class="badge badge-success">'+(data.data)[scan]["status"]+'</span>';
-  }else {
-    var table_status = row.insertCell(4).innerHTML = '<span class="badge badge-warning">'+(data.data)[scan]["status"]+'</span>';   
+  if((data.data)[scan]["funds"] === "COMPLETED"){
+    row.insertCell(5).innerHTML = '<span class="badge badge-success" style="font-size:15px;">'+(data.data)[scan]["funds"]+'</span>';
+  }else if((data.data)[scan]["funds"] === "INCOMPLETE"){
+    row.insertCell(5).innerHTML = '<span class="badge badge-danger" style="font-size:15px;">'+(data.data)[scan]["remains"]+'</span>';   
+  }else{
+    row.insertCell(5).innerHTML = '<span class="badge badge-primary" style="font-size:15px;">'+(data.data)[scan]["remains"]+'</span>'; 
   }
 }
                 
@@ -69,4 +72,3 @@ for (i = 0; i < len; i++) {
 
   }                 
  
-        
